@@ -1,16 +1,10 @@
-# convex_bottom_bar_example
+# convex_navigation_bar example
 
-Demonstrates how to use the convex_bottom_bar plugin.
+Run with Flutter >=3.50 and Dart >=3.14:
 
-## Getting Started
+```sh
+flutter pub get
+flutter run
+```
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app uses the local parent package. For migration from `convex_bottom_bar`, read [MIGRATION.md](../MIGRATION.md). Release: 4.0.0.

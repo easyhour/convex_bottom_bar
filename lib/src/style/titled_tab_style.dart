@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../item.dart';
 import 'blend_image_icon.dart';
 import 'inner_builder.dart';
 import 'transition_container.dart';
@@ -34,12 +33,12 @@ class TitledTabStyle extends InnerBuilder {
 
   /// Create style builder.
   TitledTabStyle({
-    required List<TabItem> items,
-    required Color activeColor,
-    required Color color,
+    required super.items,
+    required super.activeColor,
+    required super.color,
     required this.curve,
     required this.backgroundColor,
-  }) : super(items: items, activeColor: activeColor, color: color);
+  });
 
   @override
   Widget build(BuildContext context, int index, bool active) {
@@ -93,7 +92,7 @@ class TitledTabStyle extends InnerBuilder {
                 color: item.blend ? backgroundColor : null,
               ),
             ),
-          )
+          ),
         ],
       );
     }

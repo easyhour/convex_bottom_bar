@@ -14,17 +14,18 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Decorate the provided [Image] or [IconData].
 class BlendImageIcon<T> extends StatelessWidget {
   /// Create image widget
-  const BlendImageIcon(this.image, {Key? key, this.color, this.size})
-      : assert(image is Widget || image is IconData,
-            'image must be IconData or Widget'),
-        super(key: key);
+  const BlendImageIcon(this.image, {super.key, this.color, this.size})
+    : assert(
+        image is Widget || image is IconData,
+        'image must be IconData or Widget',
+      );
 
   /// Color used for Icon and gradient.
   final Color? color;
@@ -42,11 +43,7 @@ class BlendImageIcon<T> extends StatelessWidget {
       // flutter web do not support shader mask. (flutter v1.12.x)
       var showRawImage = kIsWeb || color == null;
       if (showRawImage) {
-        return SizedBox(
-          width: s,
-          height: s,
-          child: image as Widget,
-        );
+        return SizedBox(width: s, height: s, child: image as Widget);
       }
       return SizedBox(
         width: s,

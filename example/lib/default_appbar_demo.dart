@@ -14,11 +14,9 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:convex_navigation_bar/convex_navigation_bar.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'components/chip_item.dart';
 import 'components/choose_tab_item.dart';
@@ -31,6 +29,8 @@ import 'model/badge.dart';
 import 'model/choice_value.dart';
 
 class DefaultAppBarDemo extends StatefulWidget {
+  const DefaultAppBarDemo({super.key});
+
   @override
   State createState() {
     return _State();
@@ -123,13 +123,21 @@ class _State extends State<DefaultAppBarDemo>
       ChooseTabItem(kTabTypes, _tabItems, _onTabItemTypeChanged),
       const Heading('Tab Style'),
     ];
-    options.addAll(kStyles.map((s) => RadioItem<TabStyle>(s, _style,
-        s.value == TabStyle.flip && kIsWeb ? _onNothing : _onStyleChanged)));
+    options.addAll(
+      kStyles.map(
+        (s) => RadioItem<TabStyle>(
+          s,
+          _style,
+          s.value == TabStyle.flip && kIsWeb ? _onNothing : _onStyleChanged,
+        ),
+      ),
+    );
     if (_style.value != TabStyle.fixed &&
         _style.value != TabStyle.fixedCircle) {
       options.add(const Heading('Animation Curve'));
       options.addAll(
-          Data.curves.map((c) => RadioItem<Curve>(c, _curve, _onCurveChanged)));
+        Data.curves.map((c) => RadioItem<Curve>(c, _curve, _onCurveChanged)),
+      );
     }
 
     return Directionality(
@@ -140,9 +148,11 @@ class _State extends State<DefaultAppBarDemo>
           backgroundColor: _barColor,
           actions: <Widget>[
             IconButton(
-              icon: Icon(_textDirection == TextDirection.rtl
-                  ? Icons.format_textdirection_r_to_l
-                  : Icons.format_textdirection_l_to_r),
+              icon: Icon(
+                _textDirection == TextDirection.rtl
+                    ? Icons.format_textdirection_r_to_l
+                    : Icons.format_textdirection_l_to_r,
+              ),
               color: Colors.white,
               tooltip: _textDirection == TextDirection.rtl
                   ? "Change to LTR"
@@ -174,20 +184,24 @@ class _State extends State<DefaultAppBarDemo>
               onPressed: () {
                 _tabController?.animateTo(2);
               },
-            )
+            ),
           ],
         ),
         body: TabBarView(
-            controller: _tabController,
-            children: _tabItems.value
-                .map((i) => i.title == 'Home' || i.title == 'Happy'
+          controller: _tabController,
+          children: _tabItems.value
+              .map(
+                (i) => i.title == 'Home' || i.title == 'Happy'
                     ? ListView(children: options)
                     : Center(
                         child: Text(
-                        '${i.title} World',
-                        style: TextStyle(fontSize: 30),
-                      )))
-                .toList(growable: false)),
+                          '${i.title} World',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+              )
+              .toList(growable: false),
+        ),
         bottomNavigationBar: _badge == null
             ? ConvexAppBar(
                 items: _tabItems.value,
@@ -203,7 +217,7 @@ class _State extends State<DefaultAppBarDemo>
                 {
                   3: _badge!.text,
                   4: Icons.assistant_photo,
-                  2: Colors.redAccent
+                  2: Colors.redAccent,
                 },
                 badgePadding: _badge!.padding,
                 badgeColor: _badge!.badgeColor,

@@ -14,26 +14,31 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar/convex_navigation_bar.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'widget_test.dart';
 
 void main() {
   testWidgets('Test StyleProvider', (WidgetTester tester) async {
-    await tester.pumpWidget(material(StyleProvider(
-        style: Style(),
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: ConvexAppBar(
-            items: [
-              TabItem(icon: Icons.gradient, title: ''),
-              TabItem(icon: Icons.help_outline, title: ''),
-              TabItem(icon: Icons.work, title: ''),
-            ],
+    await tester.pumpWidget(
+      material(
+        StyleProvider(
+          style: Style(),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: ConvexAppBar(
+              items: [
+                TabItem(icon: Icons.gradient, title: ''),
+                TabItem(icon: Icons.help_outline, title: ''),
+                TabItem(icon: Icons.work, title: ''),
+              ],
+            ),
           ),
-        ))));
+        ),
+      ),
+    );
   });
   // no longer needed for null safety
   /*testWidgets('Test Provider assertion, style should not be null',

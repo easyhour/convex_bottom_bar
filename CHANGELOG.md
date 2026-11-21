@@ -1,3 +1,11 @@
+## 4.0.0
+
+- First public release under the `convex_navigation_bar` package name, forked from `convex_bottom_bar`.
+- Require Flutter 3.50 and Dart 3.14; migrate Material/Cupertino imports to standalone UI packages.
+- Update runtime, development and example dependency constraints; modernize examples and analysis.
+- Retain source-fork fixes, original licenses and public widget/model names.
+- Add the `convex_navigation_bar.dart` entrypoint, preserve the previous barrel as a compatibility export, and document the breaking consumer migration.
+
 ## [3.2.0]
 * Support flutter 3.7
 

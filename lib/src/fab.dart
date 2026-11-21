@@ -14,15 +14,15 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/src/painter.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar/src/painter.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Single convex button widget
 class ConvexButton extends StatelessWidget {
-  static const _DEFAULT_SIZE = 60.0;
-  static const _DEFAULT_TOP = 50.0;
-  static const _DEFAULT_SIGMA = 2.0;
-  static const _DEFAULT_THICKNESS = 4.0;
+  static const _defaultSize = 60.0;
+  static const _defaultTop = 50.0;
+  static const _defaultSigma = 2.0;
+  static const _defaultThickness = 4.0;
 
   /// Size of convex shape, should be lager than [top]
   final double? size;
@@ -44,14 +44,14 @@ class ConvexButton extends StatelessWidget {
 
   /// Make new instance of [ConvexButton]
   const ConvexButton({
-    Key? key,
+    super.key,
     this.size,
     this.sigma,
     required this.child,
     this.thickness,
     this.backgroundColor,
     this.top,
-  }) : super(key: key);
+  });
 
   /// Make a centered convex button.
   ///
@@ -69,7 +69,7 @@ class ConvexButton extends StatelessWidget {
     Color? backgroundColor,
     VoidCallback? onTap,
   }) {
-    thickness = thickness ?? _DEFAULT_THICKNESS;
+    thickness = thickness ?? _defaultThickness;
     var fab = Container(
       margin: EdgeInsets.only(bottom: thickness),
       decoration: BoxDecoration(
@@ -91,22 +91,25 @@ class ConvexButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-      Container(
-        height: thickness ?? _DEFAULT_THICKNESS,
-        width: double.infinity,
-        child: CustomPaint(
-          painter: ConvexPainter(
-            top: -(top ?? _DEFAULT_TOP),
-            width: size ?? _DEFAULT_SIZE,
-            height: size ?? _DEFAULT_SIZE,
-            color: backgroundColor ?? Colors.grey[50]!,
-            sigma: sigma ?? _DEFAULT_SIGMA,
-            leftPercent: const AlwaysStoppedAnimation<double>(0.5),
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        SizedBox(
+          height: thickness ?? _defaultThickness,
+          width: double.infinity,
+          child: CustomPaint(
+            painter: ConvexPainter(
+              top: -(top ?? _defaultTop),
+              width: size ?? _defaultSize,
+              height: size ?? _defaultSize,
+              color: backgroundColor ?? Colors.grey[50]!,
+              sigma: sigma ?? _defaultSigma,
+              leftPercent: const AlwaysStoppedAnimation<double>(0.5),
+            ),
           ),
         ),
-      ),
-      child,
-    ]);
+        child,
+      ],
+    );
   }
 }

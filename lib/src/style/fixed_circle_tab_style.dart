@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../item.dart';
 import 'blend_image_icon.dart';
 import 'inner_builder.dart';
 
@@ -29,13 +28,13 @@ class FixedCircleTabStyle extends InnerBuilder {
   final int convexIndex;
 
   /// Create style builder
-  FixedCircleTabStyle(
-      {required List<TabItem> items,
-      required Color activeColor,
-      required Color color,
-      required this.backgroundColor,
-      required this.convexIndex})
-      : super(items: items, activeColor: activeColor, color: color);
+  FixedCircleTabStyle({
+    required super.items,
+    required super.activeColor,
+    required super.color,
+    required this.backgroundColor,
+    required this.convexIndex,
+  });
 
   @override
   Widget build(BuildContext context, int index, bool active) {
@@ -51,10 +50,7 @@ class FixedCircleTabStyle extends InnerBuilder {
         // necessary otherwise the badge will not large enough
         width: style.layoutSize,
         height: style.layoutSize,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: c,
-        ),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: c),
         margin: EdgeInsets.all(margin),
         child: BlendImageIcon(
           active ? item.activeIcon ?? item.icon : item.icon,

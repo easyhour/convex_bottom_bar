@@ -14,11 +14,10 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class Heading extends StatelessWidget {
-  const Heading(this.text);
+  const Heading(this.text, {super.key});
 
   final String text;
 
@@ -29,12 +28,7 @@ class Heading extends StatelessWidget {
       height: 48.0,
       padding: const EdgeInsetsDirectional.only(start: 56.0),
       alignment: AlignmentDirectional.centerStart,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: theme.primaryColor,
-        ),
-      ),
+      child: Text(text, style: TextStyle(color: theme.primaryColor)),
     );
   }
 }

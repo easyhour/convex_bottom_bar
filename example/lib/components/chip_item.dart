@@ -14,13 +14,12 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../model/badge.dart';
 
 class ChipItem extends StatelessWidget {
-  const ChipItem(this.chips, this.selectedChip, this.onChanged);
+  const ChipItem(this.chips, this.selectedChip, this.onChanged, {super.key});
 
   final List<SampleBadge?> chips;
   final SampleBadge? selectedChip;
@@ -39,18 +38,20 @@ class ChipItem extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               border: Border.all(
-                  color: chip == selectedChip
-                      ? Colors.black
-                      : const Color(0xFFD5D7DA),
-                  width: 2),
+                color: chip == selectedChip
+                    ? Colors.black
+                    : const Color(0xFFD5D7DA),
+                width: 2,
+              ),
             ),
             child: chip == null
                 ? Center(child: Text('clear'))
                 : Center(
                     child: Material(
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(chip.borderRadius ?? 20),
+                        borderRadius: BorderRadius.circular(
+                          chip.borderRadius ?? 20,
+                        ),
                       ),
                       type: MaterialType.card,
                       color: chip.badgeColor ?? Colors.redAccent,

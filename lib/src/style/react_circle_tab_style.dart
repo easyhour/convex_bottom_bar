@@ -14,10 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../../convex_bottom_bar.dart';
-import '../item.dart';
 import 'blend_image_icon.dart';
 import 'inner_builder.dart';
 import 'transition_container.dart';
@@ -32,12 +30,12 @@ class ReactCircleTabStyle extends InnerBuilder {
 
   /// Create style builder.
   ReactCircleTabStyle({
-    required List<TabItem> items,
-    required Color activeColor,
-    required Color color,
+    required super.items,
+    required super.activeColor,
+    required super.color,
     required this.backgroundColor,
     required this.curve,
-  }) : super(items: items, activeColor: activeColor, color: color);
+  });
 
   @override
   Widget build(BuildContext context, int index, bool active) {

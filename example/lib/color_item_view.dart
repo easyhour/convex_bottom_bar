@@ -14,13 +14,12 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ColorItemView extends StatelessWidget {
   final Color color;
 
-  ColorItemView(this.color);
+  const ColorItemView(this.color, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class ColorItemView extends StatelessWidget {
       color: color,
       alignment: Alignment.center,
       child: Text(
-        color.value.toRadixString(16).toUpperCase(),
+        color.toARGB32().toRadixString(16).toUpperCase(),
         style: const TextStyle(color: Colors.white),
       ),
     );

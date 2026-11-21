@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../item.dart';
 import 'blend_image_icon.dart';
 import 'inner_builder.dart';
 import 'transition_container.dart';
@@ -28,11 +27,11 @@ class ReactTabStyle extends InnerBuilder {
 
   /// Create style builder.
   ReactTabStyle({
-    required List<TabItem> items,
-    required Color activeColor,
-    required Color color,
+    required super.items,
+    required super.activeColor,
+    required super.color,
     required this.curve,
-  }) : super(items: items, activeColor: activeColor, color: color);
+  });
 
   @override
   Widget build(BuildContext context, int index, bool active) {
@@ -53,33 +52,43 @@ class ReactTabStyle extends InnerBuilder {
         ),
       ];
       if (!noLabel) {
-        children.add(Text(item.title ?? '',
-            style: style.textStyle(activeColor, item.fontFamily)));
+        children.add(
+          Text(
+            item.title ?? '',
+            style: style.textStyle(activeColor, item.fontFamily),
+          ),
+        );
       }
       return Container(
         padding: const EdgeInsets.only(bottom: 2),
         child: Column(
-          mainAxisAlignment:
-              noLabel ? MainAxisAlignment.center : MainAxisAlignment.end,
+          mainAxisAlignment: noLabel
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.end,
           children: children,
         ),
       );
     }
     var children = <Widget>[
-      BlendImageIcon(item.icon,
-          color: item.blend ? color : null, size: style.iconSize),
+      BlendImageIcon(
+        item.icon,
+        color: item.blend ? color : null,
+        size: style.iconSize,
+      ),
     ];
     if (!noLabel) {
-      children.add(Text(item.title ?? '',
-          style: style.textStyle(color, item.fontFamily)));
+      children.add(
+        Text(item.title ?? '', style: style.textStyle(color, item.fontFamily)),
+      );
     }
     return Semantics(
       label: item.title,
       child: Container(
         padding: const EdgeInsets.only(bottom: 2),
         child: Column(
-          mainAxisAlignment:
-              noLabel ? MainAxisAlignment.center : MainAxisAlignment.end,
+          mainAxisAlignment: noLabel
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.end,
           children: children,
         ),
       ),

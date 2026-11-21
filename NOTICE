@@ -1,0 +1,5 @@
+convex_navigation_bar
+
+This distribution is derived from convex_bottom_bar. Original copyright and license notices are retained in LICENSE and source files.
+
+Modified in 2026 for the convex_navigation_bar release: package metadata and entrypoints, standalone Material/Cupertino imports, dependency and tooling updates, examples, tests and documentation.

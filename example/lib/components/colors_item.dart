@@ -14,13 +14,17 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../model/named_color.dart';
 
 class ColorsItem extends StatelessWidget {
-  const ColorsItem(this.colors, this.selectedColor, this.onChanged);
+  const ColorsItem(
+    this.colors,
+    this.selectedColor,
+    this.onChanged, {
+    super.key,
+  });
 
   final List<NamedColor> colors;
   final Color selectedColor;
@@ -35,10 +39,7 @@ class ColorsItem extends StatelessWidget {
           onPressed: () {
             onChanged(namedColor.color);
           },
-          constraints: const BoxConstraints.tightFor(
-            width: 32.0,
-            height: 32.0,
-          ),
+          constraints: const BoxConstraints.tightFor(width: 32.0, height: 32.0),
           fillColor: namedColor.color,
           shape: CircleBorder(
             side: BorderSide(

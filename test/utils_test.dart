@@ -14,8 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/src/reused_gradient.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar/src/reused_gradient.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 import '../bar.dart';
 import '../interface.dart';
@@ -36,8 +36,11 @@ abstract class InnerBuilder extends DelegateBuilder {
   StyleHook? _style;
 
   /// Create style builder.
-  InnerBuilder(
-      {required this.items, required this.activeColor, required this.color});
+  InnerBuilder({
+    required this.items,
+    required this.activeColor,
+    required this.color,
+  });
 
   /// Get style config
   StyleHook ofStyle(BuildContext context) {

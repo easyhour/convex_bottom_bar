@@ -76,3 +76,7 @@ pubspec.lock
 # Pana report
 pana_visual/
 coverage/
+
+# Generated Flutter platform intermediates
+**/ephemeral/
+**/.flutter-plugins-dependencies

@@ -49,7 +49,7 @@ dependencies:
 ```
 
 ```dart
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:convex_navigation_bar/convex_bottom_bar.dart';
 
 Scaffold(
   bottomNavigationBar: ConvexAppBar(

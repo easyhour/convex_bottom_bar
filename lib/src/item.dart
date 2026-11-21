@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 /// Tab item used for [ConvexAppBar].
 class TabItem<T> {
@@ -43,7 +43,9 @@ class TabItem<T> {
     required this.icon,
     this.activeIcon,
     bool? isIconBlend,
-  })  : assert(icon is IconData || icon is Widget,
-            'TabItem only support IconData and Widget'),
-        blend = isIconBlend ?? (icon is IconData);
+  }) : assert(
+         icon is IconData || icon is Widget,
+         'TabItem only support IconData and Widget',
+       ),
+       blend = isIconBlend ?? (icon is IconData);
 }

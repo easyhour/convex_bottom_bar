@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar/convex_navigation_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'model/badge.dart';
 import 'model/choice_value.dart';
@@ -39,10 +38,10 @@ class Data {
       tileMode: TileMode.repeated,
     ),
     RadialGradient(
-      center: const Alignment(0, 0), // near the top right
+      center: Alignment(0, 0), // near the top right
       radius: 5,
       colors: [Colors.green, Colors.blue, Colors.redAccent],
-    )
+    ),
   ];
 
   static const namedColors = [
@@ -64,9 +63,12 @@ class Data {
   static const badges = [
     null,
     SampleBadge('1'),
-    SampleBadge('hot',
-        badgeColor: Colors.orange, padding: EdgeInsets.only(left: 7, right: 7)),
-    SampleBadge('99+', borderRadius: 2)
+    SampleBadge(
+      'hot',
+      badgeColor: Colors.orange,
+      padding: EdgeInsets.only(left: 7, right: 7),
+    ),
+    SampleBadge('99+', borderRadius: 2),
   ];
 
   static const curves = [
@@ -101,9 +103,10 @@ class Data {
           title: 'Happy',
         ),
         TabItem<Image>(
-            icon: Image.asset('images/sample-2.png'),
-            activeIcon: Image.asset('images/sample-2-2.png'),
-            title: 'New'),
+          icon: Image.asset('images/sample-2.png'),
+          activeIcon: Image.asset('images/sample-2-2.png'),
+          title: 'New',
+        ),
         TabItem<Image>(
           icon: Image.asset('images/sample-3.png'),
           activeIcon: Image.asset('images/sample-3-2.png'),

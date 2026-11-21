@@ -1,3 +1,6 @@
+// Public uppercase constants are retained for source compatibility.
+// ignore_for_file: constant_identifier_names
+
 /*
  *  Copyright 2020 Chaobin Wu <chaobinwu89@gmail.com>
  *  
@@ -16,7 +19,7 @@
 
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'chip_builder.dart';
 import 'interface.dart';
@@ -210,32 +213,32 @@ class ConvexAppBar extends StatefulWidget {
     Curve? curve,
     ChipBuilder? chipBuilder,
   }) : this.builder(
-          key: key,
-          itemBuilder: supportedStyle(
-            style ?? TabStyle.reactCircle,
-            items: items,
-            color: color ?? Colors.white60,
-            activeColor: activeColor ?? Colors.white,
-            backgroundColor: backgroundColor ?? Colors.blue,
-            curve: curve ?? Curves.easeInOut,
-          ),
-          onTap: onTap,
-          onTapNotify: onTabNotify,
-          controller: controller,
-          backgroundColor: backgroundColor,
-          shadowColor: shadowColor,
-          count: items.length,
-          initialActiveIndex: initialActiveIndex,
-          disableDefaultTabController: disableDefaultTabController ?? false,
-          gradient: gradient,
-          height: height,
-          curveSize: curveSize,
-          top: top,
-          elevation: elevation,
-          cornerRadius: cornerRadius,
-          curve: curve ?? Curves.easeInOut,
-          chipBuilder: chipBuilder,
-        );
+         key: key,
+         itemBuilder: supportedStyle(
+           style ?? TabStyle.reactCircle,
+           items: items,
+           color: color ?? Colors.white60,
+           activeColor: activeColor ?? Colors.white,
+           backgroundColor: backgroundColor ?? Colors.blue,
+           curve: curve ?? Curves.easeInOut,
+         ),
+         onTap: onTap,
+         onTapNotify: onTabNotify,
+         controller: controller,
+         backgroundColor: backgroundColor,
+         shadowColor: shadowColor,
+         count: items.length,
+         initialActiveIndex: initialActiveIndex,
+         disableDefaultTabController: disableDefaultTabController ?? false,
+         gradient: gradient,
+         height: height,
+         curveSize: curveSize,
+         top: top,
+         elevation: elevation,
+         cornerRadius: cornerRadius,
+         curve: curve ?? Curves.easeInOut,
+         chipBuilder: chipBuilder,
+       );
 
   /// Define a custom tab style by implement a [DelegateBuilder].
   ///
@@ -253,7 +256,7 @@ class ConvexAppBar extends StatefulWidget {
   /// }
   /// ```
   const ConvexAppBar.builder({
-    Key? key,
+    super.key,
     required this.itemBuilder,
     required this.count,
     this.initialActiveIndex,
@@ -271,12 +274,15 @@ class ConvexAppBar extends StatefulWidget {
     this.cornerRadius,
     this.curve = Curves.easeInOut,
     this.chipBuilder,
-  })  : assert(top == null || top <= 0, 'top should be negative'),
-        assert(initialActiveIndex == null || initialActiveIndex < count,
-            'initial index should < $count'),
-        assert(cornerRadius == null || cornerRadius >= 0,
-            'cornerRadius must >= 0'),
-        super(key: key);
+  }) : assert(top == null || top <= 0, 'top should be negative'),
+       assert(
+         initialActiveIndex == null || initialActiveIndex < count,
+         'initial index should < $count',
+       ),
+       assert(
+         cornerRadius == null || cornerRadius >= 0,
+         'cornerRadius must >= 0',
+       );
 
   /// Construct a new appbar with badge.
   ///
@@ -369,6 +375,7 @@ class ConvexAppBar extends StatefulWidget {
 class ConvexAppBarState extends State<ConvexAppBar>
     with TickerProviderStateMixin {
   int? _currentIndex;
+
   /// get index
   int? get currentIndex => _currentIndex;
   int _warpUnderwayCount = 0;
@@ -377,7 +384,7 @@ class ConvexAppBarState extends State<ConvexAppBar>
   TabController? _controller;
 
   int _previousTimestamp = 0;
-  static const _TRANSITION_DURATION = 150;
+  static const _transitionDuration = 150;
 
   @override
   void initState() {
@@ -385,11 +392,13 @@ class ConvexAppBarState extends State<ConvexAppBar>
       throw FlutterError.fromParts(<DiagnosticsNode>[
         ErrorSummary('ConvexAppBar is configured with cornerRadius'),
         ErrorDescription(
-            'Currently the corner only work for fixed style, if you are using '
-            'other styles, the convex shape can be broken on the first and last tab item '),
+          'Currently the corner only work for fixed style, if you are using '
+          'other styles, the convex shape can be broken on the first and last tab item ',
+        ),
         ErrorHint(
-            'You should use TabStyle.fixed or TabStyle.fixedCircle to make the'
-            ' background display with topLeft/topRight corner'),
+          'You should use TabStyle.fixed or TabStyle.fixedCircle to make the'
+          ' background display with topLeft/topRight corner',
+        ),
       ]);
     }
     _resetState();
@@ -430,7 +439,8 @@ class ConvexAppBarState extends State<ConvexAppBar>
       from: from ?? _currentIndex,
       to: index,
       duration: Duration(
-          milliseconds: gap < _TRANSITION_DURATION ? 0 : _TRANSITION_DURATION),
+        milliseconds: gap < _transitionDuration ? 0 : _transitionDuration,
+      ),
     );
     // ignore: unawaited_futures
     _animationController?.forward();
@@ -442,10 +452,11 @@ class ConvexAppBarState extends State<ConvexAppBar>
     _previousTimestamp = DateTime.now().millisecondsSinceEpoch;
   }
 
-  Animation<double> _updateAnimation(
-      {int? from,
-      int? to,
-      Duration duration = const Duration(milliseconds: _TRANSITION_DURATION)}) {
+  Animation<double> _updateAnimation({
+    int? from,
+    int? to,
+    Duration duration = const Duration(milliseconds: _transitionDuration),
+  }) {
     if (from != null && (from == to) && _animation != null) {
       return _animation!;
     }
@@ -455,10 +466,7 @@ class ConvexAppBarState extends State<ConvexAppBar>
     final upper = (2 * to + 1) / (2 * widget.count);
     _animationController?.dispose();
     final controller = AnimationController(duration: duration, vsync: this);
-    final curve = CurvedAnimation(
-      parent: controller,
-      curve: widget.curve,
-    );
+    final curve = CurvedAnimation(parent: controller, curve: widget.curve);
     _animationController = controller;
     return _animation = Tween(begin: lower, end: upper).animate(curve);
   }
@@ -486,8 +494,9 @@ class ConvexAppBarState extends State<ConvexAppBar>
           widget.controller == null &&
           widget.initialActiveIndex != null) {
         throw FlutterError(
-            'ConvexAppBar.initialActiveIndex is not allowed when working with TabController.\n'
-            'Please setup through TabController.initialIndex, or disable DefaultTabController by #disableDefaultTabController');
+          'ConvexAppBar.initialActiveIndex is not allowed when working with TabController.\n'
+          'Please setup through TabController.initialIndex, or disable DefaultTabController by #disableDefaultTabController',
+        );
       }
       return true;
     }());
@@ -531,8 +540,10 @@ class ConvexAppBarState extends State<ConvexAppBar>
   @override
   Widget build(BuildContext context) {
     // take care of iPhoneX' safe area at bottom edge
-    final additionalBottomPadding =
-        math.max(MediaQuery.of(context).padding.bottom, 0.0);
+    final additionalBottomPadding = math.max(
+      MediaQuery.of(context).padding.bottom,
+      0.0,
+    );
     final convexIndex = isFixed() ? (widget.count ~/ 2) : _currentIndex;
     final active = isFixed() ? convexIndex == _currentIndex : true;
 
@@ -553,7 +564,7 @@ class ConvexAppBarState extends State<ConvexAppBar>
       clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: <Widget>[
-        Container(
+        SizedBox(
           height: height,
           width: width,
           child: CustomPaint(
@@ -576,12 +587,13 @@ class ConvexAppBarState extends State<ConvexAppBar>
           top: widget.top ?? CURVE_TOP,
           bottom: additionalBottomPadding,
           child: FractionallySizedBox(
-              widthFactor: factor,
-              alignment: offset,
-              child: GestureDetector(
-                onTap: () => _onTabClick(convexIndex),
-                child: _newTab(convexIndex, active),
-              )),
+            widthFactor: factor,
+            alignment: offset,
+            child: GestureDetector(
+              onTap: () => _onTabClick(convexIndex),
+              child: _newTab(convexIndex, active),
+            ),
+          ),
         ),
       ],
     );
@@ -598,13 +610,15 @@ class ConvexAppBarState extends State<ConvexAppBar>
         continue;
       }
       var active = _currentIndex == i;
-      children.add(Expanded(
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => _onTabClick(i),
-          child: _newTab(i, active),
+      children.add(
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => _onTabClick(i),
+            child: _newTab(i, active),
+          ),
         ),
-      ));
+      );
     }
 
     return Container(
@@ -667,8 +681,7 @@ class StyleProvider extends InheritedWidget {
   ///
   ///  * [ConvexAppBar]
   ///  * [StyleHook]
-  StyleProvider({Key? key, required this.style, required Widget child})
-      : super(key: key, child: child);
+  const StyleProvider({super.key, required this.style, required super.child});
 
   /// Get instance of style provider, can be null if you're not providing one.
   static StyleProvider? of(BuildContext context) {

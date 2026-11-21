@@ -16,7 +16,7 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 import 'transition_container.dart';
 
@@ -63,9 +63,11 @@ class SlideBuilder extends TransitionContainerBuilder<Offset> {
   final bool reverse;
 
   /// Create slide builder.
-  SlideBuilder(
-      {required Curve curve, required this.child, required this.reverse})
-      : super(curve);
+  SlideBuilder({
+    required Curve curve,
+    required this.child,
+    required this.reverse,
+  }) : super(curve);
 
   @override
   Widget build(Animation<Offset> animation) {
@@ -103,46 +105,48 @@ class FlipBuilder extends TransitionContainerBuilder {
 
   @override
   Animation animation(AnimationController controller) {
-    return Tween(begin: 0.0, end: pi / 2).animate(
-      CurvedAnimation(parent: controller, curve: curve),
-    );
+    return Tween(
+      begin: 0.0,
+      end: pi / 2,
+    ).animate(CurvedAnimation(parent: controller, curve: curve));
   }
 
   @override
   Widget build(Animation animation) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          Transform(
-            alignment: Alignment.bottomCenter,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..translate(0.0, (cos(animation.value) * (height / 2)),
-                  ((height / 2) * sin(animation.value)))
-              ..rotateX(-(pi / 2) + animation.value),
-            child: Container(
-              child: Center(child: bottomChild),
-            ),
-          ),
-          animation.value < (85 * pi / 180)
-              ? Transform(
+    return Stack(
+      children: <Widget>[
+        Transform(
+          alignment: Alignment.bottomCenter,
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.001)
+            ..translateByDouble(
+              0.0,
+              (cos(animation.value) * (height / 2)),
+              ((height / 2) * sin(animation.value)),
+              1.0,
+            )
+            ..rotateX(-(pi / 2) + animation.value),
+          child: Center(child: bottomChild),
+        ),
+        animation.value < (85 * pi / 180)
+            ? Transform(
+                alignment: Alignment.bottomCenter,
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..translateByDouble(
+                    0.0,
+                    -(height / 2) * sin(animation.value),
+                    ((height / 2) * cos(animation.value)),
+                    1.0,
+                  )
+                  ..rotateX(animation.value),
+                child: Container(
                   alignment: Alignment.bottomCenter,
-                  transform: Matrix4.identity()
-                    ..setEntry(3, 2, 0.001)
-                    ..translate(
-                      0.0,
-                      -(height / 2) * sin(animation.value),
-                      ((height / 2) * cos(animation.value)),
-                    )
-                    ..rotateX(animation.value),
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Center(child: topChild),
-                  ),
-                )
-              : Container(),
-        ],
-      ),
+                  child: Center(child: topChild),
+                ),
+              )
+            : Container(),
+      ],
     );
   }
 }

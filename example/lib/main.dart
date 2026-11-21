@@ -14,16 +14,18 @@
  *  limitations under the License.
  */
 
-import 'package:convex_app_bar_example/convex_button_demo.dart';
-import 'package:convex_app_bar_example/custom_appbar_sample.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar_example/convex_button_demo.dart';
+import 'package:convex_navigation_bar_example/custom_appbar_sample.dart';
+import 'package:convex_navigation_bar/convex_navigation_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'default_appbar_demo.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State createState() => _State();
 }
@@ -44,15 +46,18 @@ class _State extends State<MyApp> {
 }
 
 class HelloConvexAppBar extends StatelessWidget {
+  const HelloConvexAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Hello ConvexAppBar')),
       body: Center(
-          child: TextButton(
-        child: Text('Click to show full example'),
-        onPressed: () => Navigator.of(context).pushNamed('/bar'),
-      )),
+        child: TextButton(
+          child: Text('Click to show full example'),
+          onPressed: () => Navigator.of(context).pushNamed('/bar'),
+        ),
+      ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.react,
         items: [
@@ -61,7 +66,7 @@ class HelloConvexAppBar extends StatelessWidget {
           TabItem(icon: Icons.assessment),
         ],
         initialActiveIndex: 1,
-        onTap: (int i) => print('click index=$i'),
+        onTap: (int i) => debugPrint('click index=$i'),
       ),
     );
   }

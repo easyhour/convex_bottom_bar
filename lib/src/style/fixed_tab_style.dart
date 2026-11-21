@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../item.dart';
 import 'blend_image_icon.dart';
 import 'inner_builder.dart';
 
@@ -27,11 +26,11 @@ class FixedTabStyle extends InnerBuilder {
 
   /// Create style builder.
   FixedTabStyle({
-    required List<TabItem> items,
-    required Color activeColor,
-    required Color color,
+    required super.items,
+    required super.activeColor,
+    required super.color,
     required this.convexIndex,
-  }) : super(items: items, activeColor: activeColor, color: color);
+  });
 
   @override
   Widget build(BuildContext context, int index, bool active) {
@@ -52,7 +51,7 @@ class FixedTabStyle extends InnerBuilder {
               color: item.blend ? (c) : null,
               size: style.activeIconSize,
             ),
-            Text(item.title ?? '', style: textStyle)
+            Text(item.title ?? '', style: textStyle),
           ],
         ),
       );

@@ -14,12 +14,14 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar/convex_navigation_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'color_item_view.dart';
 
 class CustomAppBarDemo extends StatefulWidget {
+  const CustomAppBarDemo({super.key});
+
   @override
   State createState() {
     return _State();
@@ -59,56 +61,61 @@ class _State extends State<CustomAppBarDemo>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        initialIndex: 0,
-        length: items.length,
-        child: Scaffold(
-          appBar: AppBar(title: const Text('Custom ConvexAppBar')),
-          body: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            children: items
-                .map((i) => i.title == 'Discovery'
+      initialIndex: 0,
+      length: items.length,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Custom ConvexAppBar')),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: items
+              .map(
+                (i) => i.title == 'Discovery'
                     ? paletteBody()
                     : Center(
                         child: Text(
-                        '<\t\t${i.title}\t\t>',
-                        style: TextStyle(fontSize: 30),
-                      )))
-                .toList(growable: false),
-          ),
-          bottomNavigationBar: StyleProvider(
-            style: Style(),
-            child: ConvexAppBar(
-              disableDefaultTabController: true,
-              initialActiveIndex: 0,
-              height: 50,
-              top: -30,
-              curveSize: 100,
-              style: TabStyle.fixedCircle,
-              items: [
-                TabItem(title: '2019', icon: Icons.link),
-                TabItem(
-                    icon: Container(
+                          '<\t\t${i.title}\t\t>',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+              )
+              .toList(growable: false),
+        ),
+        bottomNavigationBar: StyleProvider(
+          style: Style(),
+          child: ConvexAppBar(
+            disableDefaultTabController: true,
+            initialActiveIndex: 0,
+            height: 50,
+            top: -30,
+            curveSize: 100,
+            style: TabStyle.fixedCircle,
+            items: [
+              TabItem(title: '2019', icon: Icons.link),
+              TabItem(
+                icon: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color(0xFFFF5722),
                   ),
                   child: Icon(Icons.add, color: Colors.white, size: 40),
-                )),
-                TabItem(title: "2020", icon: Icons.work),
-              ],
-              backgroundColor: _tabBackgroundColor,
-              cornerRadius: 25,
-              onTabNotify: (i) {
-                var intercept = i == 1;
-                if (intercept) {
-                  Navigator.pushNamed(context, '/fab');
-                }
-                return !intercept;
-              },
-              onTap: (i) => debugPrint('click $i'),
-            ),
+                ),
+              ),
+              TabItem(title: "2020", icon: Icons.work),
+            ],
+            backgroundColor: _tabBackgroundColor,
+            cornerRadius: 25,
+            onTabNotify: (i) {
+              var intercept = i == 1;
+              if (intercept) {
+                Navigator.pushNamed(context, '/fab');
+              }
+              return !intercept;
+            },
+            onTap: (i) => debugPrint('click $i'),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget builder() {
@@ -121,16 +128,19 @@ class _State extends State<CustomAppBarDemo>
 
   Container tabContent(TabItem data, Color color) {
     return Container(
-        height: 50,
-        padding: EdgeInsets.only(bottom: 2),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Icon(data.icon, color: color),
-            Text(data.title != null ? data.title! : "",
-                style: TextStyle(color: color))
-          ],
-        ));
+      height: 50,
+      padding: EdgeInsets.only(bottom: 2),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Icon(data.icon, color: color),
+          Text(
+            data.title != null ? data.title! : "",
+            style: TextStyle(color: color),
+          ),
+        ],
+      ),
+    );
   }
 
   GridView paletteBody() {
@@ -140,10 +150,12 @@ class _State extends State<CustomAppBarDemo>
       mainAxisSpacing: 1,
       crossAxisSpacing: 1,
       children: paletteColors
-          .map((c) => GestureDetector(
-                child: ColorItemView(c),
-                onTap: () => _onColorChanged(c),
-              ))
+          .map(
+            (c) => GestureDetector(
+              child: ColorItemView(c),
+              onTap: () => _onColorChanged(c),
+            ),
+          )
           .toList(),
     );
   }
@@ -164,33 +176,29 @@ class _CustomBuilder extends DelegateBuilder {
   @override
   Widget build(BuildContext context, int index, bool active) {
     var navigationItem = items[index];
-    var _color = active ? Colors.white : Colors.white60;
+    var color = active ? Colors.white : Colors.white60;
 
     if (index == items.length ~/ 2) {
       return Container(
         width: 60,
         height: 60,
         margin: EdgeInsets.all(5),
-        decoration: BoxDecoration(shape: BoxShape.circle, color: _color),
-        child: Icon(
-          Icons.add,
-          size: 40,
-          color: _tabBackgroundColor,
-        ),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+        child: Icon(Icons.add, size: 40, color: _tabBackgroundColor),
       );
     }
-    var _icon = active
+    var icon = active
         ? navigationItem.activeIcon ?? navigationItem.icon
         : navigationItem.icon;
-    var _title = navigationItem.title ?? "";
+    var title = navigationItem.title ?? "";
     return Container(
       color: Colors.transparent,
       padding: EdgeInsets.only(bottom: 2),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Icon(_icon, color: _color),
-          Text(_title, style: TextStyle(color: _color))
+          Icon(icon, color: color),
+          Text(title, style: TextStyle(color: color)),
         ],
       ),
     );

@@ -14,14 +14,13 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../model/choice_value.dart';
 
 // copy of _RadioItem from flutter gallery
 class RadioItem<T> extends StatelessWidget {
-  const RadioItem(this.value, this.groupValue, this.onChanged);
+  const RadioItem(this.value, this.groupValue, this.onChanged, {super.key});
 
   final ChoiceValue<T> value;
   final ChoiceValue<T> groupValue;
@@ -36,10 +35,13 @@ class RadioItem<T> extends StatelessWidget {
       child: MergeSemantics(
         child: Row(
           children: <Widget>[
-            Radio<ChoiceValue<T>>(
-              value: value,
+            RadioGroup<ChoiceValue<T>>(
               groupValue: groupValue,
-              onChanged: onChanged,
+              onChanged: (selected) => onChanged?.call(selected),
+              child: Radio<ChoiceValue<T>>(
+                value: value,
+                enabled: onChanged != null,
+              ),
             ),
             Expanded(
               child: Semantics(

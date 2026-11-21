@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'convex_shape.dart';
 import 'reused_gradient.dart';
@@ -72,8 +72,12 @@ class ConvexPainter extends CustomPainter {
     var percent = textDirection == TextDirection.rtl
         ? (1 - leftPercent.value)
         : leftPercent.value;
-    var guest =
-        Rect.fromLTWH(size.width * percent - width / 2, top, width, height);
+    var guest = Rect.fromLTWH(
+      size.width * percent - width / 2,
+      top,
+      width,
+      height,
+    );
     _gradient.updateWith(_paint, size: host);
     var path = _shape.getOuterPath(host, guest);
     canvas.drawPath(path, _shadowPaint);

@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../item.dart';
 import 'blend_image_icon.dart';
 import 'inner_builder.dart';
 import 'transition_container.dart';
@@ -28,11 +27,11 @@ class TextInTabStyle extends InnerBuilder {
 
   /// Create style builder.
   TextInTabStyle({
-    required List<TabItem> items,
-    required Color activeColor,
-    required Color color,
+    required super.items,
+    required super.activeColor,
+    required super.color,
     required this.curve,
-  }) : super(items: items, activeColor: activeColor, color: color);
+  });
 
   @override
   Widget build(BuildContext context, int index, bool active) {
@@ -66,8 +65,11 @@ class TextInTabStyle extends InnerBuilder {
     return Semantics(
       label: item.title,
       child: Center(
-        child: BlendImageIcon(item.icon,
-            size: style.iconSize, color: item.blend ? color : null),
+        child: BlendImageIcon(
+          item.icon,
+          size: style.iconSize,
+          color: item.blend ? color : null,
+        ),
       ),
     );
   }

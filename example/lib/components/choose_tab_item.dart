@@ -14,15 +14,20 @@
  *  limitations under the License.
  */
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:convex_navigation_bar/convex_navigation_bar.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../model/choice_value.dart';
 import 'radio_item.dart';
 
 class ChooseTabItem extends StatelessWidget {
-  const ChooseTabItem(this.tabTypes, this.selectedType, this.onChanged);
+  const ChooseTabItem(
+    this.tabTypes,
+    this.selectedType,
+    this.onChanged, {
+    super.key,
+  });
 
   final List<ChoiceValue<List<TabItem>>> tabTypes;
   final ChoiceValue<List<TabItem>> selectedType;

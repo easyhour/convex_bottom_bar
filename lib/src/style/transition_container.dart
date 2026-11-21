@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'transition_container_builder.dart';
 
@@ -31,6 +31,7 @@ class TransitionContainer extends StatefulWidget {
 
   /// Wrap a widget with scale transition.
   TransitionContainer.scale({
+    super.key,
     required Widget child,
     required Curve curve,
     this.duration,
@@ -39,6 +40,7 @@ class TransitionContainer extends StatefulWidget {
 
   /// Wrap a widget with slide transition.
   TransitionContainer.slide({
+    super.key,
     required Widget child,
     required Curve curve,
     this.duration,
@@ -48,6 +50,7 @@ class TransitionContainer extends StatefulWidget {
 
   /// Wrap a widget with flip transition.
   TransitionContainer.flip({
+    super.key,
     required Widget topChild,
     required Widget bottomChild,
     required Curve curve,
@@ -55,14 +58,14 @@ class TransitionContainer extends StatefulWidget {
     this.duration,
     this.data,
   }) : builder = FlipBuilder(
-          height,
-          curve: curve,
-          topChild: topChild,
-          bottomChild: bottomChild,
-        );
+         height,
+         curve: curve,
+         topChild: topChild,
+         bottomChild: bottomChild,
+       );
 
   @override
-  _State createState() {
+  State<TransitionContainer> createState() {
     return _State();
   }
 }

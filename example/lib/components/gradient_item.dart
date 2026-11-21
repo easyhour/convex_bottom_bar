@@ -14,11 +14,15 @@
  *  limitations under the License.
  */
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class GradientItem extends StatelessWidget {
-  const GradientItem(this.colors, this.selectedColor, this.onChanged);
+  const GradientItem(
+    this.colors,
+    this.selectedColor,
+    this.onChanged, {
+    super.key,
+  });
 
   final List<Gradient?> colors;
   final Gradient? selectedColor;
@@ -37,10 +41,11 @@ class GradientItem extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               border: Border.all(
-                  color: namedColor == selectedColor
-                      ? Colors.black
-                      : const Color(0xFFD5D7DA),
-                  width: 2),
+                color: namedColor == selectedColor
+                    ? Colors.black
+                    : const Color(0xFFD5D7DA),
+                width: 2,
+              ),
               gradient: namedColor,
               color: namedColor != null ? Colors.grey : null,
             ),
