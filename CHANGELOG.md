@@ -1,3 +1,7 @@
+## 4.0.1
+
+- Refresh pub.dev analysis after correcting the repository default branch to expose this package.
+
 ## 4.0.0
 
 - First public release under the `convex_navigation_bar` package name, forked from `convex_bottom_bar`.

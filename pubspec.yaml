@@ -1,6 +1,6 @@
 name: convex_navigation_bar
 description: Customizable convex bottom navigation bars with animated tabs, badges, multiple styles and Material and Cupertino support.
-version: 4.0.0
+version: 4.0.1
 repository: https://github.com/easyhour/convex_bottom_bar
 homepage: https://github.com/easyhour/convex_bottom_bar
 issue_tracker: https://github.com/easyhour/convex_bottom_bar/issues
